@@ -8,17 +8,16 @@
         <h3>Name</h3>
         <div class="inputbox">
           <input v-model="name" @input="updateName" type="text" placeholder="Search Character">
-          <button class="search-btn" >Search</button>
         </div>
       </div>
       <div class="section">
         <h3>Status</h3>
         <div class="custom-select">
           <select v-model="status" @change="updateStatus">
-            <option value="" disabled selected hidden>Select status</option>
+            <option value="">All</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
-            <option value="unknown">unknown</option>
+            <option value="unknown">Unknown</option>
           </select>
         </div>
       </div>
@@ -35,11 +34,11 @@ const status = ref('');
 const emit = defineEmits(['updateName', 'updateStatus'])
 
 const updateName = () => {
-emit('update:name', name.value)
+  emit('update:name', name.value)
 }
 
 const updateStatus = () => {
-emit('update:status', status.value)
+  emit('update:status', status.value === 'all' ? '' : status.value)
 }
 </script>
 
@@ -107,19 +106,6 @@ h3 {
   color: #23242a;
   font-size: 1.2rem;
   letter-spacing: 0.05em;
-}
-
-.search-btn{
-  font-size: 1rem;
-  color: whitesmoke;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background: rgba(200, 40, 150, 0.8);
-}
-
-.search-btn:hover{
-  background: rgba(200, 40, 150);
 }
 
 .custom-select {
