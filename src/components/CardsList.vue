@@ -8,7 +8,7 @@
       </div>
     </div>
     <Pagination class="pagination" :prev="paginationInfo.prev" :next="paginationInfo.next" @prev-page="fetchPrevPage" @next-page="fetchNextPage"
-    />
+    :total-pages="totalPages" :current-page="currentPage"/>
 </template>
 
 <script setup>
@@ -16,9 +16,14 @@ import { ref, onMounted, defineProps, defineExpose, watch } from 'vue';
 import Card from './Card.vue';
 import Pagination from './Pagination.vue';
 
+const cardsPerPage = 20;
+
 const cards = ref([]);
 const paginationInfo = ref({ prev: null, next: null });
 const filteredCards = ref([]);
+
+const totalPages = ref(null)
+const currentPage = ref(1)
 
 const all = ref(true);
 
@@ -33,7 +38,6 @@ const props = defineProps({
     required: true
   }
 });
-
 
 async function fetchData(url) {
   try {
@@ -73,17 +77,27 @@ function filterCards() {
       const statusMatch = !props.status || card.status.toLowerCase() === props.status.toLowerCase();
       return nameMatch && statusMatch;
     });
-    all.value = false; 
+    all.value = false;
   } else {
-    filteredCards.value = [];  
-    all.value = true; 
+    filteredCards.value = [];
+    all.value = true;
   }
+  totalPages.value = setTotalPages(); 
 }
 
 watch(() => [props.name, props.status], () => {
-  fetchData(`${initialUrl}?name=${props.name}`); 
-  filterCards(); 
+  fetchData(`${initialUrl}?name=${props.name}&status=${props.status}`); 
 });
+
+function setTotalPages() {
+  return Math.ceil(filteredCards.value.length / cardsPerPage.value);
+}
+
+function paginatedCards() {
+  const startIndex = (currentPage.value - 1) * cardsPerPage.value;
+  const endIndex = startIndex + cardsPerPage.value;
+  return filteredCards.value.slice(startIndex, endIndex);
+}
 </script>
 
 <style scoped>

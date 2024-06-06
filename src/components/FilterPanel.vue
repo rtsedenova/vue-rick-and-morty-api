@@ -7,13 +7,13 @@
       <div class="section">
         <h3>Name</h3>
         <div class="inputbox">
-          <input v-model="name" @input="updateName" type="text" placeholder="Search Character">
+          <input v-model="name" type="text" placeholder="Search Character">
         </div>
       </div>
       <div class="section">
         <h3>Status</h3>
         <div class="custom-select">
-          <select v-model="status" @change="updateStatus">
+          <select v-model="status">
             <option value="">All</option>
             <option value="alive">Alive</option>
             <option value="dead">Dead</option>
@@ -21,6 +21,9 @@
           </select>
         </div>
       </div>
+    </div>
+    <div class="btn-container">
+      <button class="search-btn" @click="handleSearch">Search</button>
     </div>
   </div>
 </template>
@@ -31,15 +34,12 @@ import { ref, defineEmits } from 'vue';
 const name = ref('');
 const status = ref('');
 
-const emit = defineEmits(['updateName', 'updateStatus'])
+const emit = defineEmits(['update:name', 'update:status'])
 
-const updateName = () => {
-  emit('update:name', name.value)
-}
-
-const updateStatus = () => {
-  emit('update:status', status.value === 'all' ? '' : status.value)
-}
+const handleSearch = () => {
+  emit('update:name', name.value);
+  emit('update:status', status.value === 'all' ? '' : status.value);
+};
 </script>
 
 <style scoped>
@@ -51,6 +51,7 @@ const updateStatus = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  justify-content: center;
 }
 
 .filter-header {
@@ -106,6 +107,27 @@ h3 {
   color: #23242a;
   font-size: 1.2rem;
   letter-spacing: 0.05em;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+  padding: 0 2vw;
+}
+
+.search-btn{
+  margin-bottom: 3vh;
+ width: 100%;
+ font-size: 1rem;
+ color: whitesmoke;
+ padding: 12px; 
+ border-radius: 5px;
+ border: none;
+ background: rgba(60, 60, 60);
+}
+
+.search-btn:hover{
+ background: rgba(60, 60, 60, 0.8);
 }
 
 .custom-select {
