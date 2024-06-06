@@ -1,7 +1,44 @@
-# Vue 3 + Vite
+# Rick and Morty Characters
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+![Vite](https://img.shields.io/badge/vite-5.2.0-blue)
+![Vue.js](https://img.shields.io/badge/vue-3.4.21-brightgreen)
 
-## Recommended IDE Setup
+## Description
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+This is a simple application for viewing characters from the animated series "Rick and Morty". It supports filtering characters by name and status, as well as pagination. The project is built using Vite, Vue 3 with the Composition API, and the Rick and Morty API (https://rickandmortyapi.com/documentation).
+
+## Features
+
+- **Filtering**: Users can filter characters by name and status.
+- **Pagination**: Navigate between pages using the API.
+- **Card Display**: Character cards are rendered based on API data.
+
+## Technologies
+
+- [Vite](https://vitejs.dev/) - A fast build tool.
+- [Vue 3](https://vuejs.org/) - A framework for building user interfaces.
+- [Rick and Morty API](https://rickandmortyapi.com/documentation) - An API for fetching character data.
+
+## Installation and Setup
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/rtsedenova/vue-rick-and-morty-api.git
+```
+
+2. Install the dependencies:
+```
+npm i
+```
+
+### Demo
+
+Link: https://test-vue-rick-and-morty-api-app.netlify.app/
